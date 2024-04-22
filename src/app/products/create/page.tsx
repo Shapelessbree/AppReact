@@ -12,7 +12,7 @@ import { Button } from '@/components/Button';
 
 export default function CreateProduct() {
     const methods = useForm<Product>({
-        resolver: yupResolver(createProduct),
+       //resolver: yupResolver(createProduct),
     });
 
     const onSubmit: SubmitHandler<Product> = (data) => {
