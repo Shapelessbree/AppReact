@@ -1,51 +1,44 @@
 "use client";
 
 import { MainLayout } from '@/layouts';
-import { getProductById } from '@/services/productService';
+import { getProductById } from '@/services/prodcts';
 import { Product } from '@/types/product';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 export default function ProductDetailsPage() {
-    const { productId } = useParams<{ productId: string }>();
-    console.log('productId:', productId);
-    const [product, setProduct] = useState<Product | null>(null);
-    const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [product, setProduct] = useState<Product | null>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const { id_product } = useParams(); // Obtén el parámetro de la URL correctamente
   
-    useEffect(() => {
-        setIsLoading(true);
-        console.log('productId in useEffect:', productId); // debug
-    
-        if (productId) {
-          getProductById(productId)
-            .then((res) => {
-              if (res) {
-                setProduct(res);
-              } else {
-                setProduct(null); // debug
-              }
-            })
-            .catch((error) => {
-              console.error('Error fetching product:', error);
-            })
-            .finally(() => setIsLoading(false));
-        } else {
-          setIsLoading(false);
-        }
-      }, [productId]);
-    
-
-    if (isLoading) {
-        return <div>Cargando...</div>;
+  useEffect(() => {
+    if (id_product) { // Verifica si id_product tiene un valor
+      getProductById(id_product)
+        .then((res) => {
+          if (res) {
+            setProduct(res); // Utiliza la respuesta directamente
+          } else {
+            setProduct(null); // Debug
+          }
+        })
+        .catch((error) => {
+          console.error('Error fetching product:', error);
+        })
+        .finally(() => setIsLoading(false));
     }
+  }, [id_product]);
 
-    if (!product) {
-        return <div>No se encontró el producto.</div>;
-    }
+  if (isLoading) {
+    return <div>Cargando...</div>;
+  }
 
-    else return (
-        <MainLayout>
-             <div className="max-w-4xl mx-auto px-4 py-8">
+  if (!product) {
+    return <div>No se encontró el producto.</div>;
+  }
+
+  return (
+    <MainLayout>
+      <div className="max-w-4xl mx-auto px-4 py-8">
         <h1 className="text-3xl font-semibold mb-4">{product.title}</h1>
         <div className="flex flex-wrap justify-between">
           <div className="w-full md:w-1/2">
@@ -60,6 +53,6 @@ export default function ProductDetailsPage() {
           </div>
         </div>
       </div>
-        </MainLayout>
-    );
+    </MainLayout>
+  );
 }
