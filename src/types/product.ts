@@ -4,7 +4,10 @@ export interface Product {
     price: number;
     description: string;
     category: string;
-    rating: number;
-    image: string; // URL de la imagen
+    rating: {
+        rate: number,
+        count: number;
+    };
+    image: string; 
 }
 
