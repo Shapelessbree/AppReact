@@ -12,7 +12,7 @@ export default function Home() {
     <MainLayout>
       <div className="flex flex-col w-full">
         <div className="flex w-full justify-end">
-          <div className="w-[200px] h-[40px] rounded-lg bg-blue-500 flex justify-center items-center"
+          <div className="w-[200px] h-[40px] rounded-lg bg-red-300 flex justify-center items-center"
             onClick={() => {
               navigate.push(Routes.productsRoutes.createProduct);
             }}>

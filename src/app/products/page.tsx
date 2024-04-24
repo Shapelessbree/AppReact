@@ -11,7 +11,7 @@ export default function Products() {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [products, setProducts] = useState<FakeProduct[]>([]);
 
-  const headers = ["id", "Nombre", "Precio", "Categoría", "Rating", "Acciones"]
+  const headers = ["id", "Name", "Price", "Category", "Rating", "Actions"]
 
   function getProductsFunc() {
     getProducts().then((res) => {
@@ -31,7 +31,7 @@ export default function Products() {
   return (
     <MainLayout  >
       <div>
-        <h1 className="text-3xl font-bold text-black">Productos</h1>
+        <h1 className="text-3xl font-bold text-gray-400">Product</h1>
         <Table headers={headers} isLoading={isLoading}>
           {products.map((product: FakeProduct) => (
             <TableTr key={product.id.toString()}>
@@ -44,10 +44,10 @@ export default function Products() {
               <td >{product.rating.rate}</td>
               <td >
                 <Button
-                  className="text-white bg-blue-500 rounded-md px-2 py-1"
+                  className="text-white bg-blue-400 rounded-md px-2 py-2"
                   href={`/products/detail/${product.id}`}
                 >
-                  Ver
+                  See
                 </Button>
               </td>
             </TableTr>

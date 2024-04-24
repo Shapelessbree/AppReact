@@ -29,7 +29,7 @@ export const SidebarItem: React.FC<Props> = ({
   return (
     <Link
       className={`flex justify-center h-[49px] rounded-lg bg-transparent pl-5 ${isActiveItem(path)
-        ? "border-b-[0.5px] border-medium-blue shadow-fourPx"
+        ? "border-b-[0.5px] border-medium-red-300 shadow-fourPx"
         : ""
         }`}
       href={path}>
